@@ -1,9 +1,9 @@
 var page = require('webpage').create();
 console.log("111");
 
-page.onConsoleMessage = function(msg) {
-  console.log(msg);
-}
+//page.onConsoleMessage = function(msg) {
+//  console.log(msg);
+//}
 
 function waitFor(testFx, onReady, timeOutMillis) {
   var maxtimeOutMillis = timeOutMillis ? timeOutMillis : 3000, //< Default Max Timout is 3s
@@ -43,8 +43,23 @@ page.open('http://www.bigschedules.com', function() {
       page.evaluate(function() {
         console.log('$("#targetOriginal").value', $("#targetOriginal").value);
         console.log('$("#targetDestination").value', $("#targetDestination").value);
-        $("#targetOriginal").value = "Keelung, Taiwan (TWKEL)";
-        $("#targetDestination").value = "Hong Kong, Hong Kong (HKHKG)";
+        $("#targetOriginal").value = "Keelung";
+        waitFor(function(){//the autocompletion list appears
+          return page.evaluate(function(){
+            return $("#ul.dropdown-menu autocomplete ng-isolate-scope ng-hide li");            
+          });
+        },
+        function(){
+          $("#ul.dropdown-menu autocomplete ng-isolate-scope ng-hide li").click();
+        }); 
+
+        $("#targetDestination").value = "Hong Kong";
+        waitFor(function(){//the autocompletion list appears
+          return page.evaluate(function(){
+            return $("#ul.dropdown-menu autocomplete ng-isolate-scope ng-hide li");});     
+        },
+        function(){$("#ul.dropdown-menu autocomplete ng-isolate-scope ng-hide li").click();        
+        }); 
 
         console.log('$("#targetOriginal").value', $("#targetOriginal").value);
         console.log('$("#targetDestination").value', $("#targetDestination").value);
