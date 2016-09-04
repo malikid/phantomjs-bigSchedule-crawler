@@ -1,15 +1,17 @@
 # Protractor
 
 ### Requirements
-install node (by npm or standalone installation)
-npm i -g protractor
-webdriver-manager update
-npm i -g mocha
+- install node (by npm or standalone installation)
+- `npm i -g protractor`
+- `webdriver-manager update`
+- `npm i -g mocha`
 
 ### then
+```
 npm i
 webdriver-manager start
 protractor protractor.conf.js
+```
 
 ### TODO
 1. click next page (it can't be clicked maybe because it's covered by other layer)
